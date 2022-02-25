@@ -1,0 +1,17 @@
+[Unit]
+Description=Indexer daemon
+
+
+[Service]
+Type=idle
+User=centos
+WorkingDirectory=/home/centos/blockscout/apps/indexer/
+ExecStart=mix run --no-halt
+Restart=always
+RestartSec=30s
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=INDEXER
+
+[Install]
+WantedBy=multi-user.target
