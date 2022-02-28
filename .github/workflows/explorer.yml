@@ -1,7 +1,8 @@
 name: explorer
 
 on: 
-  workflow_dispatch:
+  push:
+    - main
   
 
 jobs:
