@@ -2,7 +2,8 @@ name: explorer
 
 on: 
   push:
-    - workquest
+    branches:
+      - main
   
 
 jobs:
