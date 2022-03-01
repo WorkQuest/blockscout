@@ -22,15 +22,7 @@
     state: latest
   become: yes
 
-- name: Install esl-erlang and unzip
-  dnf:
-    name: 
-      - esl-erlang 
-      - unzip
-    state: latest
-  become: yes
-
-- name: Copy explorer.service file
+- name: Copy script to install Erlang and elixir
   copy:
     src: ./install-erlang-elixir-el8.sh
     dest: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
