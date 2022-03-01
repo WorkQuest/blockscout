@@ -38,7 +38,7 @@ jobs:
         run: |
           chmod 700 ci-scripts
           cd ci-scripts
-          ansible-playbook -i "${{ secrets.REMOTE_HOST }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
+          ansible-playbook -i "${{ secrets.REMOTE_HOST_INDEXER }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
             APPS=indexer.service \
             BACKEND_BIN=${{ secrets.BACKEND_BIN }} \
             PATH=${{ secrets.PATH }} \
@@ -51,4 +51,5 @@ jobs:
             NETWORK=${{ secrets.NETWORK }} \
             SUBNETWORK=${{ secrets.SUBNETWORK }} \
             ETHEREUM_JSONRPC_HTTP_URL=${{ secrets.ETHEREUM_JSONRPC_HTTP_URL }} \
-            SRC_DIR=${{ github.workspace }}/" backend-update.yml;
+            ETHEREUM_JSONRPC_VARIANT=${{ secrets.ETHEREUM_JSONRPC_VARIANT }} \
+            SRC_DIR=${{ github.workspace }}/" indexer.yml;
