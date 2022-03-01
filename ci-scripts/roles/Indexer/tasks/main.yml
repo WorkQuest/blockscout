@@ -54,6 +54,7 @@
      echo ${{ NETWORK }}
      echo ${{ SUBNETWORK }}
      echo ${{ ETHEREUM_JSONRPC_HTTP_URL }}
+     echo ${{ ETHEREUM_JSONRPC_VARIANT }}
 
 - name: Copy service file
   template:

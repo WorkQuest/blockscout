@@ -1,10 +1,17 @@
 name: explorer
 
 on: 
-  push:
-    branches:
-      - main
-      - workquest
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug 
   
 
 jobs:
@@ -34,14 +41,5 @@ jobs:
           ansible-playbook -i "${{ secrets.REMOTE_HOST }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
             APPS=explorer.service \
             BACKEND_BIN=${{ secrets.BACKEND_BIN }} \
-            PATH=${{ secrets.PATH }} \
-            FIRST_BLOCK=${{ secrets.FIRST_BLOCK }} \
-            DATABASE_URL=${{ secrets.DATABASE_URL }} \
-            SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
-            CHAIN_SPEC_PATH=${{ secrets.CHAIN_SPEC_PATH }} \
-            COIN=${{ secrets.COIN }} \
-            CHAIN_ID=${{ secrets.CHAIN_ID }} \
-            NETWORK=${{ secrets.NETWORK }} \
-            SUBNETWORK=${{ secrets.SUBNETWORK }} \
-            ETHEREUM_JSONRPC_HTTP_URL=${{ secrets.ETHEREUM_JSONRPC_HTTP_URL }} \
+            
             SRC_DIR=${{ github.workspace }}/" backend-update.yml;
