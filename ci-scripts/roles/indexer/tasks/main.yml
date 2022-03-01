@@ -22,12 +22,6 @@
     state: latest
   become: yes
 
-- name: Install erlang repo
-  dnf:
-    name: https://packages.erlang-solutions.com/erlang-solutions-2.0-1.noarch.rpm
-    state: present
-  become: yes
-
 - name: Install esl-erlang and unzip
   dnf:
     name: 
