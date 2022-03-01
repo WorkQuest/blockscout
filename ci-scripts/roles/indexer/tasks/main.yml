@@ -26,6 +26,9 @@
   copy:
     src: ./install-erlang-elixir-el8.sh
     dest: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
+    owner: '{{ REMOTE_USER }}'
+    group: '{{ REMOTE_USER }}'
+    mode: u+r
 
 - name: Install Erlang and Elexir
   ansible.builtin.script: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
