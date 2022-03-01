@@ -1,17 +1,9 @@
 name: indexer
 
-on: 
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning' 
-        type: choice
-        options:
-        - info
-        - warning
-        - debug 
+on:
+  workflow_run:
+    types: [requested]
+    branches: [workquest]
   
 
 jobs:
