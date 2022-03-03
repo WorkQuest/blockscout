@@ -24,7 +24,7 @@
 
 - name: Copy script to install Erlang and elixir
   copy:
-    src: ./install-erlang-elixir-el8.sh
+    src: install-erlang-elixir-el8.sh
     dest: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
     owner: '{{ REMOTE_USER }}'
     group: '{{ REMOTE_USER }}'
@@ -49,7 +49,7 @@
 
 - name: Copy service file
   template:
-    src: './{{ APPS }}'
+    src: '{{ APPS }}'
     dest: '/etc/systemd/system/{{ APPS }}'
 
 - name: Migrate database
