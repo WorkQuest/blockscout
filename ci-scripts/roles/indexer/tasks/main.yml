@@ -52,6 +52,7 @@
   template:
     src: '{{ APPS }}'
     dest: '/etc/systemd/system/{{ APPS }}'
+  become: yes
 
 - name: Migrate database
   shell: mix do ecto.migrate
