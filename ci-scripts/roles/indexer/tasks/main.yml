@@ -26,7 +26,7 @@
   shell: curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
   register: result
 
-- name: Install dependens Blockscout
+- name: Install dependencies Blockscout
   dnf:
     name:
       - nodejs
@@ -54,17 +54,17 @@
 
 - name: Environments
   shell: | 
-     echo ${{ PATH }}
-     echo ${{ FIRST_BLOCK }}
-     echo ${{ DATABASE_URL }}
-     echo ${{ SECRET_KEY_BASE }}
-     echo ${{ CHAIN_SPEC_PATH }}
-     echo ${{ COIN }}
-     echo ${{ CHAIN_ID }}
-     echo ${{ NETWORK }}
-     echo ${{ SUBNETWORK }}
-     echo ${{ ETHEREUM_JSONRPC_HTTP_URL }}
-     echo ${{ ETHEREUM_JSONRPC_VARIANT }}
+     "echo ${{ PATH }}"
+     "echo ${{ FIRST_BLOCK }}"
+     "echo ${{ DATABASE_URL }}"
+     "echo ${{ SECRET_KEY_BASE }}"
+     "echo ${{ CHAIN_SPEC_PATH }}"
+     "echo ${{ COIN }}"
+     "echo ${{ CHAIN_ID }}"
+     "echo ${{ NETWORK }}"
+     "echo ${{ SUBNETWORK }}"
+     "echo ${{ ETHEREUM_JSONRPC_HTTP_URL }}"
+     "echo ${{ ETHEREUM_JSONRPC_VARIANT }}"
 
 - name: Copy service file
   copy:
@@ -75,14 +75,20 @@
     mode: u+rx
   become: yes
 
+- name: Install dependencies mix
+  shell: mix do deps.get, local.rebar --force, deps.compile, compile
+  args:
+    chdir: '{{ BACKEND_BIN }}'
+  ignore_errors: yes
+
 - name: Create database
   shell: mix do ecto.create
   args:
-    chdir: '{{ BACKEND_BIN }}/apps/indexer'
+    chdir: '{{ BACKEND_BIN }}'
   ignore_errors: yes
 
 - name: Migrate database
   shell: mix do ecto.migrate
   args:
-    chdir: '{{ BACKEND_BIN }}/apps/indexer'
+    chdir: '{{ BACKEND_BIN }}'
   ignore_errors: yes
