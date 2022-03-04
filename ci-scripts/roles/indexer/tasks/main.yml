@@ -54,17 +54,17 @@
 
 - name: Environments
   shell: | 
-     "echo ${{ PATH }}"
-     "echo ${{ FIRST_BLOCK }}"
-     "echo ${{ DATABASE_URL }}"
-     "echo ${{ SECRET_KEY_BASE }}"
-     "echo ${{ CHAIN_SPEC_PATH }}"
-     "echo ${{ COIN }}"
-     "echo ${{ CHAIN_ID }}"
-     "echo ${{ NETWORK }}"
-     "echo ${{ SUBNETWORK }}"
-     "echo ${{ ETHEREUM_JSONRPC_HTTP_URL }}"
-     "echo ${{ ETHEREUM_JSONRPC_VARIANT }}"
+     echo {{ PATH }}
+     echo {{ FIRST_BLOCK }}
+     echo {{ DATABASE_URL }}
+     echo {{ SECRET_KEY_BASE }}
+     echo {{ CHAIN_SPEC_PATH }}
+     echo {{ COIN }}
+     echo {{ CHAIN_ID }}
+     echo {{ NETWORK }}
+     echo {{ SUBNETWORK }}
+     echo {{ ETHEREUM_JSONRPC_HTTP_URL }}
+     echo {{ ETHEREUM_JSONRPC_VARIANT }}
 
 - name: Copy service file
   copy:
