@@ -22,6 +22,24 @@
     state: latest
   become: yes
 
+- name: Install NodeJs repositories
+  shell: curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
+  register: result
+
+- name: Install dependens Blockscout
+  dnf:
+    name:
+      - Nodejs
+      - automake
+      - inotify-tools
+      - libtool
+      - inotify-tools
+      - gcc
+      - gmp
+      - cargo
+  state: latest
+  become: yes
+
 - name: Copy script to install Erlang and elixir
   copy:
     src: install-erlang-elixir-el8.sh
@@ -47,6 +65,9 @@
      echo ${{ SUBNETWORK }}
      echo ${{ ETHEREUM_JSONRPC_HTTP_URL }}
      echo ${{ ETHEREUM_JSONRPC_VARIANT }}
+     export ${{ TEST }}
+  became: yes
+  becam_user: '{{ REMOTE_USER }}'
 
 - name: Copy service file
   copy:
@@ -56,6 +77,12 @@
     group: '{{ REMOTE_USER }}'
     mode: u+rx
   become: yes
+
+- name: Create database
+  shell: mix do ecto.create
+  args:
+    chdir: '{{ BACKEND_BIN }}/apps/indexer'
+  ignore_errors: yes
 
 - name: Migrate database
   shell: mix do ecto.migrate
