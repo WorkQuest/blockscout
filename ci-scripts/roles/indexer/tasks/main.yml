@@ -49,12 +49,13 @@
      echo ${{ ETHEREUM_JSONRPC_VARIANT }}
 
 - name: Copy service file
-  template:
+  copy:
     src: '{{ APPS }}'
     dest: '/etc/systemd/system/{{ APPS }}'
+    owner: '{{ REMOTE_USER }}'
+    group: '{{ REMOTE_USER }}'
+    mode: u+rx
   become: yes
-  become_method: su
-  become_user: root
 
 - name: Migrate database
   shell: mix do ecto.migrate
