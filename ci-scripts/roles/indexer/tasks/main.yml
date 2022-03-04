@@ -66,6 +66,15 @@
      echo {{ ETHEREUM_JSONRPC_HTTP_URL }}
      echo {{ ETHEREUM_JSONRPC_VARIANT }}
 
+- name: Copy or generate env.sh file
+  template:
+    src: ./env.sh.j2
+    dest: '{{ BACKEND_BIN }}/.env.sh'
+    mode: u+rx
+
+- name: Add variables
+  shell: '{{ BACKEND_BIN }}/.env.sh'
+
 - name: Copy service file
   copy:
     src: '{{ APPS }}'
