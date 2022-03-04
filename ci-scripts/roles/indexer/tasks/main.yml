@@ -28,7 +28,7 @@
     dest: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
     owner: '{{ REMOTE_USER }}'
     group: '{{ REMOTE_USER }}'
-    mode: u+r, 0770
+    mode: u+rwx
 
 - name: Install Erlang and Elexir
   shell: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
