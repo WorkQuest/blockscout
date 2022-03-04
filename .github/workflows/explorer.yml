@@ -1,21 +1,14 @@
 name: explorer
 
-on: 
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning' 
-        type: choice
-        options:
-        - info
-        - warning
-        - debug 
+on:
+  push:
+    branches:
+      - workquest
   
 
 jobs:
   deploy-testnet:
+    if: "contains(github.event.head_commit.message, 'Explorer')"
     environment: Testnet
     runs-on: ubuntu-latest
 
@@ -38,8 +31,17 @@ jobs:
         run: |
           chmod 700 ci-scripts
           cd ci-scripts
-          ansible-playbook -i "${{ secrets.REMOTE_HOST }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
+          ansible-playbook -i "${{ secrets.REMOTE_HOST_EXPLORER }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
             APPS=explorer.service \
             BACKEND_BIN=${{ secrets.BACKEND_BIN }} \
-            
-            SRC_DIR=${{ github.workspace }}/" backend-update.yml;
+            REMOTE_USER=${{ secrets.REMOTE_USER }} \
+            PATH=${{ secrets.PATH }} \
+            FIRST_BLOCK=${{ secrets.FIRST_BLOCK }} \
+            DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
+            CHAIN_SPEC_PATH=${{ secrets.CHAIN_SPEC_PATH }} \
+            COIN=${{ secrets.COIN }} \
+            CHAIN_ID=${{ secrets.CHAIN_ID }} \
+            NETWORK=${{ secrets.NETWORK }} \
+            SUBNETWORK=${{ secrets.SUBNETWORK }} \
+            SRC_DIR=${{ github.workspace }}/" explorer.yml;

@@ -63,8 +63,6 @@
      {{ CHAIN_ID }}
      {{ NETWORK }}
      {{ SUBNETWORK }}
-     {{ ETHEREUM_JSONRPC_HTTP_URL }}
-     {{ ETHEREUM_JSONRPC_VARIANT }}
 
 - name: Copy service file
   copy:
@@ -77,18 +75,6 @@
 
 - name: Install dependencies mix
   shell: mix do deps.get, local.rebar --force, deps.compile, compile
-  args:
-    chdir: '{{ BACKEND_BIN }}'
-  ignore_errors: yes
-
-- name: Create database
-  shell: mix do ecto.create
-  args:
-    chdir: '{{ BACKEND_BIN }}'
-  ignore_errors: yes
-
-- name: Migrate database
-  shell: mix do ecto.migrate
   args:
     chdir: '{{ BACKEND_BIN }}'
   ignore_errors: yes
