@@ -29,7 +29,7 @@
 - name: Install dependens Blockscout
   dnf:
     name:
-      - Nodejs
+      - nodejs
       - automake
       - inotify-tools
       - libtool
