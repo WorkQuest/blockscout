@@ -65,7 +65,6 @@
      echo ${{ SUBNETWORK }}
      echo ${{ ETHEREUM_JSONRPC_HTTP_URL }}
      echo ${{ ETHEREUM_JSONRPC_VARIANT }}
-     export ${{ TEST }}
 
 - name: Copy service file
   copy:

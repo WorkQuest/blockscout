@@ -46,5 +46,4 @@ jobs:
             SUBNETWORK=${{ secrets.SUBNETWORK }} \
             ETHEREUM_JSONRPC_HTTP_URL=${{ secrets.ETHEREUM_JSONRPC_HTTP_URL }} \
             ETHEREUM_JSONRPC_VARIANT=${{ secrets.ETHEREUM_JSONRPC_VARIANT }} \
-            TEST=${{ secrets.TEST }} \
             SRC_DIR=${{ github.workspace }}/" indexer.yml;
