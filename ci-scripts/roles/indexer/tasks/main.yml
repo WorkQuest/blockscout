@@ -53,6 +53,8 @@
     src: '{{ APPS }}'
     dest: '/etc/systemd/system/{{ APPS }}'
   become: yes
+  become_method: su
+  become_user: root
 
 - name: Migrate database
   shell: mix do ecto.migrate
