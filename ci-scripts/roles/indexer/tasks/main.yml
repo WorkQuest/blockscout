@@ -31,7 +31,8 @@
     mode: u+r
 
 - name: Install Erlang and Elexir
-  ansible.builtin.script: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
+  shell: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
+  become: yes
 
 - name: Environments
   shell: | 
