@@ -37,7 +37,7 @@
       - gcc
       - gmp
       - cargo
-  state: latest
+    state: latest
   become: yes
 
 - name: Copy script to install Erlang and elixir
