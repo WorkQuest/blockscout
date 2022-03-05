@@ -54,15 +54,15 @@
 
 - name: Environments
   shell: | 
-     {{ PATH }}
-     {{ FIRST_BLOCK }}
-     {{ DATABASE_URL }}
-     {{ SECRET_KEY_BASE }}
-     {{ CHAIN_SPEC_PATH }}
-     {{ COIN }}
-     {{ CHAIN_ID }}
-     {{ NETWORK }}
-     {{ SUBNETWORK }}
+     '{{ PATH }}'
+     '{{ FIRST_BLOCK }}'
+     '{{ DATABASE_URL }}'
+     '{{ SECRET_KEY_BASE }}'
+     '{{ CHAIN_SPEC_PATH }}'
+     '{{ COIN }}'
+     '{{ CHAIN_ID }}'
+     '{{ NETWORK }}'
+     '{{ SUBNETWORK }}'
 
 - name: Copy service file
   copy:
