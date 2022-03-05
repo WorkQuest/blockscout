@@ -37,7 +37,7 @@ jobs:
             REMOTE_USER=${{ secrets.REMOTE_USER }} \
             PATH=${{ secrets.PATH }} \
             FIRST_BLOCK=${{ secrets.FIRST_BLOCK }} \
-            DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            DATABASE_URL=${{ secrets.DATABASE_URL_EXPLORER }} \
             SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
             CHAIN_SPEC_PATH=${{ secrets.CHAIN_SPEC_PATH }} \
             COIN=${{ secrets.COIN }} \

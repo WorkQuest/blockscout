@@ -37,7 +37,7 @@ jobs:
             BACKEND_BIN=${{ secrets.BACKEND_BIN }} \
             PATH=${{ secrets.PATH }} \
             FIRST_BLOCK=${{ secrets.FIRST_BLOCK }} \
-            DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            DATABASE_URL=${{ secrets.DATABASE_URL_INDEXER }} \
             SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
             CHAIN_SPEC_PATH=${{ secrets.CHAIN_SPEC_PATH }} \
             COIN=${{ secrets.COIN }} \
