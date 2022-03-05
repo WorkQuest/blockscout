@@ -52,19 +52,14 @@
   shell: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
   become: yes
 
-- name: Environments
-  shell: | 
-     {{ PATH }}
-     {{ FIRST_BLOCK }}
-     {{ DATABASE_URL }}
-     {{ SECRET_KEY_BASE }}
-     {{ CHAIN_SPEC_PATH }}
-     {{ COIN }}
-     {{ CHAIN_ID }}
-     {{ NETWORK }}
-     {{ SUBNETWORK }}
-     {{ ETHEREUM_JSONRPC_HTTP_URL }}
-     {{ ETHEREUM_JSONRPC_VARIANT }}
+- name: Generating env file
+  template:
+    src: ./env.sh.j2
+    dest: '{{ BACKEND_BIN }}/env.sh'
+    mode: u+rwx
+
+- name: Apply env
+  shell: '{{ BACKEND_BIN }}/env.sh'
 
 - name: Copy service file
   copy:
