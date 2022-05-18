@@ -8,47 +8,6 @@ on:
   
 
 jobs:
-  deploy-testnet:
-    if: "contains(github.event.head_commit.message, 'Indexer')"
-    environment: Testnet
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Copy code files to container
-        uses: actions/checkout@v3
-
-      - name: Environment preparation
-        run: |
-          mkdir -p ~/.ssh/
-          touch ~/.ssh/id_rsa
-          chmod -R go= ~/.ssh
-          chmod 600 ~/.ssh/id_rsa
-          echo "${{ secrets.SERVER_SSH_KEY }}" >> ~/.ssh/id_rsa
-          sudo apt-add-repository -y -u ppa:ansible/ansible
-          sudo apt-get install -y rsync
-          sudo apt-get install -y ansible
-
-      - name: Deploy to Server
-        run: |
-          chmod 700 ci-scripts
-          cd ci-scripts
-          ansible-playbook -i "${{ secrets.REMOTE_HOST_INDEXER }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
-            APPS=indexer.service \
-            REMOTE_USER=${{ secrets.REMOTE_USER }} \
-            BACKEND_BIN=${{ secrets.BACKEND_BIN }} \
-            PATH=${{ secrets.PATH }} \
-            FIRST_BLOCK=${{ secrets.FIRST_BLOCK }} \
-            DATABASE_URL=${{ secrets.DATABASE_URL_INDEXER }} \
-            SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
-            CHAIN_SPEC_PATH=${{ secrets.CHAIN_SPEC_PATH }} \
-            COIN=${{ secrets.COIN }} \
-            CHAIN_ID=${{ secrets.CHAIN_ID }} \
-            NETWORK=${{ secrets.NETWORK }} \
-            SUBNETWORK=${{ secrets.SUBNETWORK }} \
-            ETHEREUM_JSONRPC_HTTP_URL=${{ secrets.ETHEREUM_JSONRPC_HTTP_URL }} \
-            ETHEREUM_JSONRPC_VARIANT=${{ secrets.ETHEREUM_JSONRPC_VARIANT }} \
-            SRC_DIR=${{ github.workspace }}/" indexer.yml;
-
   deploy-TestNetwork:
     if: "contains(github.event.head_commit.message, 'Indexer')"
     environment: TestNetwork
@@ -75,6 +34,7 @@ jobs:
           cd ci-scripts
           ansible-playbook -i "${{ secrets.REMOTE_HOST_INDEXER }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
             APPS=indexer.service \
+            REMOTE_USER=${{ secrets.REMOTE_USER }} \
             BACKEND_BIN=${{ secrets.BACKEND_BIN }} \
             PATH=${{ secrets.PATH }} \
             FIRST_BLOCK=${{ secrets.FIRST_BLOCK }} \
