@@ -1,0 +1,77 @@
+---
+- name: Delete dir
+  file:
+    path: '{{ BACKEND_BIN }}'
+    state: absent
+
+- name: Create dir
+  file:
+    path: '{{ BACKEND_BIN }}'
+    state: directory
+    recurse: yes
+
+- name: Upload files
+  synchronize:
+    src: '{{ SRC_DIR }}'
+    dest: '{{ BACKEND_BIN }}'
+  register: copyfiles
+
+- name: Install epel-release
+  dnf:
+    name: epel-release
+    state: latest
+  become: yes
+
+- name: Install NodeJs repositories
+  shell: curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
+  register: result
+
+- name: Install dependencies Blockscout
+  dnf:
+    name:
+      - nodejs
+      - automake
+      - inotify-tools
+      - libtool
+      - inotify-tools
+      - gcc
+      - gmp
+      - cargo
+    state: latest
+  become: yes
+
+- name: Copy script to install Erlang and elixir
+  copy:
+    src: install-erlang-elixir-el8.sh
+    dest: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
+    owner: '{{ REMOTE_USER }}'
+    group: '{{ REMOTE_USER }}'
+    mode: u+rwx
+
+- name: Install Erlang and Elexir
+  shell: '{{ BACKEND_BIN }}/install-erlang-elixir-el8.sh'
+  become: yes
+
+- name: Generating env file
+  template:
+    src: ./env.sh.j2
+    dest: '{{ BACKEND_BIN }}/env.sh'
+    mode: u+rwx
+
+- name: Apply env
+  shell: '{{ BACKEND_BIN }}/env.sh'
+
+- name: Copy service file
+  copy:
+    src: '{{ APPS }}'
+    dest: '/etc/systemd/system/{{ APPS }}'
+    owner: '{{ REMOTE_USER }}'
+    group: '{{ REMOTE_USER }}'
+    mode: u+rx
+  become: yes
+
+- name: Install dependencies mix
+  shell: mix do deps.get, mix local.hex --force, local.rebar --force, deps.compile, compile
+  args:
+    chdir: '{{ BACKEND_BIN }}'
+  ignore_errors: yes

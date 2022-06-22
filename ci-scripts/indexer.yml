@@ -1,0 +1,7 @@
+---
+- name: Indexer Backend
+  hosts: all
+  gather_facts: True
+
+  roles:
+    - role: indexer

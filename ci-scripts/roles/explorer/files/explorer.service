@@ -1,0 +1,17 @@
+[Unit]
+Description=Explorer daemon
+
+
+[Service]
+Type=idle
+User=centos
+WorkingDirectory=/home/centos/blockscout/apps/explorer/
+ExecStart=mix run --no-halt
+Restart=always
+RestartSec=30s
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=EXPLORER
+
+[Install]
+WantedBy=multi-user.target
