@@ -50,7 +50,7 @@ jobs:
             SRC_DIR=${{ github.workspace }}/" indexer.yml;
 
   deploy-master:
-    if: "contains(github.event.head_commit.message, 'Indexer')"
+    if: github.ref == 'refs/heads/master' && "contains(github.event.head_commit.message, 'Indexer')"
     environment: master
     runs-on: ubuntu-latest
 
