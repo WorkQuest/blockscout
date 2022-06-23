@@ -72,13 +72,14 @@
   become: yes
 
 - name: Install secp256k1
-  shell: ./build_deps.sh
+  shell: '/home/centos/blockscout/deps/libsecp256k1/c_src/build_deps.sh'
   args:
-    chdir: '/home/centos/blockscout/deps/libsecp256k1/c_src'
+    chdir: '/home/centos/blockscout/deps/libsecp256k1/c_src/'
+  become: yes
   ignore_errors: yes
 
 - name: Install dependencies mix
-  shell: mix deps.get --force, mix do deps.get --force, mix local.hex --force, local.rebar --force, deps.compile --force, compile --force
+  shell: mix do deps.get --force, mix local.hex --force, local.rebar --force, deps.compile --force, compile --force
   args:
     chdir: '{{ BACKEND_BIN }}'
   ignore_errors: yes
