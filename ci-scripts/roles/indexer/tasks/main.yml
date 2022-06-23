@@ -72,7 +72,7 @@
   become: yes
 
 - name: Install dependencies mix
-  shell: mix do deps.get --force, mix local.hex --force, local.rebar --force, deps.compile --force, compile --force
+  shell: mix deps.get --force, mix do deps.get --force, mix local.hex --force, local.rebar --force, deps.compile --force, compile --force
   args:
     chdir: '{{ BACKEND_BIN }}'
   ignore_errors: yes
