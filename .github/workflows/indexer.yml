@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy-TestNetwork:
-    if: "contains(github.event.head_commit.message, 'Indexer')"
+    if: github.ref == 'refs/heads/master' && contains(github.event.head_commit.message, 'Indexer')
     environment: TestNetwork
     runs-on: ubuntu-latest
 
