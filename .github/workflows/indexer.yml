@@ -88,3 +88,4 @@ jobs:
             ETHEREUM_JSONRPC_HTTP_URL=${{ secrets.ETHEREUM_JSONRPC_HTTP_URL }} \
             ETHEREUM_JSONRPC_VARIANT=${{ secrets.ETHEREUM_JSONRPC_VARIANT }} \
             SRC_DIR=${{ github.workspace }}/" indexer.yml;
+            
