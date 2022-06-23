@@ -74,7 +74,7 @@
 - name: Install secp256k1
   shell: ./build_deps.sh
   args:
-    chdir: '{{ BACKEND_BIN }}/deps/libsecp256k1/c_src'
+    chdir: '/home/centos/blockscout/deps/libsecp256k1/c_src'
   ignore_errors: yes
 
 - name: Install dependencies mix
