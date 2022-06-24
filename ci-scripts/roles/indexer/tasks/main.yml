@@ -35,6 +35,7 @@
       - inotify-tools
       - libtool
       - inotify-tools
+      - gmp-devel
       - gcc
       - gmp
       - cargo
@@ -70,13 +71,6 @@
     group: '{{ REMOTE_USER }}'
     mode: u+rx
   become: yes
-
-- name: Install secp256k1
-  shell: '/home/centos/blockscout/deps/libsecp256k1/c_src/build_deps.sh'
-  args:
-    chdir: '/home/centos/blockscout/deps/libsecp256k1/c_src/'
-  become: yes
-  ignore_errors: yes
 
 - name: Install dependencies mix
   shell: mix do deps.get --force, mix local.hex --force, local.rebar --force, deps.compile --force, compile --force
