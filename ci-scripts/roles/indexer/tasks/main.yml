@@ -90,4 +90,7 @@
   args:
     chdir: '{{ BACKEND_BIN }}'
   ignore_errors: yes
-  
+
+- name: Start service indexer
+  shell: systemctl start indexer
+  become: yes
