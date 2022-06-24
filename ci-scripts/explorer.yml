@@ -1,7 +1,0 @@
----
-- name: Explorer Backend
-  hosts: all
-  gather_facts: True
-
-  roles:
-    - role: explorer

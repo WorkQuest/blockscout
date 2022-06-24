@@ -89,3 +89,4 @@
   args:
     chdir: '{{ BACKEND_BIN }}'
   ignore_errors: yes
+  
