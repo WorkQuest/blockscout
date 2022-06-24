@@ -29,6 +29,7 @@
 - name: Install dependencies Blockscout
   dnf:
     name:
+      - gcc-c++
       - make
       - nodejs
       - automake

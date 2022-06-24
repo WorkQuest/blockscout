@@ -74,6 +74,8 @@ jobs:
           cd ci-scripts
           ansible-playbook -i "${{ secrets.REMOTE_HOST_INDEXER }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \
             APPS=indexer.service \
+            ECTO_USE_SSL=${{ secrets.ECTO_USE_SSL }} \
+            MIX_ENV=${{ secrets.MIX_ENV }} \
             REMOTE_USER=${{ secrets.REMOTE_USER }} \
             BACKEND_BIN=${{ secrets.BACKEND_BIN }} \
             PATH=${{ secrets.PATH }} \
